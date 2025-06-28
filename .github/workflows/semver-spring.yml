@@ -44,4 +44,4 @@ jobs:
       - name: Push new tag
         run: |
           git tag ${{ steps.bump.outputs.new_tag }}
-          git push origin ${{ steps.bump.outputs.new_tag }}
+          git push origin ${{ steps.bump.outputs.new_tag }} || echo "Tag already exists"
