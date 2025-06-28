@@ -1,0 +1,45 @@
+name: Auto Semantic Version and Update pom.xml
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  bump-and-update-pom:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Bump semantic version
+        id: bump
+        uses: mathieudutour/github-tag-action@v6.1
+        with:
+          github_token: ${{ secrets.PERSONAL_TOKEN }}
+          default_bump: patch # Options: major | minor | patch | false
+
+      - name: Set up Java
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Update version in pom.xml
+        run: |
+          VERSION=${{ steps.bump.outputs.new_version }}
+          mvn versions:set -DnewVersion=$VERSION -DgenerateBackupPoms=false
+          echo "Bumped pom.xml to $VERSION"
+
+      - name: Commit updated pom.xml
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          git commit -am "chore: update pom.xml version to ${{ steps.bump.outputs.new_version }}"
+          git push
+
+      - name: Push new tag
+        run: |
+          git tag ${{ steps.bump.outputs.new_tag }}
+          git push origin ${{ steps.bump.outputs.new_tag }}
