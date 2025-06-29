@@ -1,1 +1,14 @@
-
+name: Auto Semantic Version and Update pom.xml
+on:
+  release:
+    types:
+      - created
+      
+jobs:
+  release-created:
+   name: Relase created
+   runs-on: ubuntu-latest
+   steps:
+    - name: Release message
+      run: echo "A new release is created"
+   
