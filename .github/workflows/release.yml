@@ -2,6 +2,7 @@ name: New release
 on:
   release:
     types:
+      - published
       - created
       
 jobs:
