@@ -1,1 +1,30 @@
-
+name: CUstom params
+on: 
+  workflow_dispatch:
+    inputs:
+       CustomerNmae:
+         description: "Add the name of the customer"
+         type: string
+         required: true
+       isPremium:
+        description: "Add premium feature"
+        type: boolean
+        required: false
+       PreferedTheme:
+        description: "Frontend theme"
+        type: choice
+        default: light
+        options:
+         - "dark"
+         - "light"
+         - "high-contast"
+jobs:
+  test-argument:
+    name: custom params
+    runs-on: ubuntu-latest
+    steps:
+      - name: Hello
+        run: echo hello workflow with custom param
+         
+      
+        
