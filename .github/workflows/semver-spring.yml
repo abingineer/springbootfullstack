@@ -1,5 +1,4 @@
 name: Auto Semantic Version and Update pom.xml
-
 on:
   push:
     branches:
