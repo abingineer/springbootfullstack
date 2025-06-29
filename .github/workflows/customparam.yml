@@ -2,7 +2,7 @@ name: CUstom params
 on: 
   workflow_dispatch:
     inputs:
-       CustomerNmae:
+       customerName:
          description: "Add the name of the customer"
          type: string
          required: true
@@ -10,7 +10,7 @@ on:
         description: "Add premium feature"
         type: boolean
         required: false
-       PreferedTheme:
+       preferedTheme:
         description: "Frontend theme"
         type: choice
         default: light
@@ -24,7 +24,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Hello
-        run: echo hello workflow with custom param
+        run: echo "hello ${{ github.event.inputs.customerName}} your prefered theme is ${{ github.event.inputs.preferedTheme}}"
          
       
         
