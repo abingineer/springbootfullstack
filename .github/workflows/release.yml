@@ -1,4 +1,4 @@
-name: Auto Semantic Version and Update pom.xml
+name: New release
 on:
   release:
     types:
