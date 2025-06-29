@@ -11,5 +11,5 @@ jobs:
    runs-on: ubuntu-latest
    steps:
     - name: Release message
-      run: echo "A new release is created"
+      run: echo "A new release is created at $(date)"
    
